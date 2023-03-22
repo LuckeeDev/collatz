@@ -1,21 +1,25 @@
 #include <SFML/Graphics.hpp>
+#include "collatz/collatz.h"
+#include <iostream>
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    int n;
 
-    while (window.isOpen()) {
-        sf::Event event{};
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
+    std::cout << "Insert a number\n";
+    std::cin >> n;
+
+    auto v = collatz::sequence(n);
+    auto last = --v.end();
+
+    std::cout << "[";
+
+    for (auto it = v.begin(); it < v.end(); it++) {
+        std::cout << *it;
+
+        if (it != last) {
+            std::cout << ", ";
         }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
     }
 
-    return 0;
+    std::cout << "]";
 }
