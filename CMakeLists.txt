@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(sfml_playground)
+project(collatz VERSION 0.0.1)
 
 # abilita il supporto per i test, tra cui l'opzione BUILD_TESTING usata sotto
 include(CTest)
@@ -26,8 +26,8 @@ string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address,undefined -fno-o
 #   le dipendenze vengono identificate automaticamente
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
-add_executable(sfml_playground main.cpp collatz/collatz.cpp)
-target_link_libraries(sfml_playground PRIVATE sfml-graphics)
+add_executable(collatz main.cpp collatz/collatz.cpp)
+target_link_libraries(collatz PRIVATE sfml-graphics)
 
 # se il testing e' abilitato...
 #   per disabilitare il testing, passare -DBUILD_TESTING=OFF a cmake durante la fase di configurazione
