@@ -26,8 +26,11 @@ string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address,undefined -fno-o
 #   le dipendenze vengono identificate automaticamente
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
-add_executable(collatz main.cpp collatz/collatz.cpp)
+find_package(TGUI 0.10 REQUIRED)
+
+add_executable(collatz main.cpp collatz/collatz.cpp events/events.cpp)
 target_link_libraries(collatz PRIVATE sfml-graphics)
+target_link_libraries(collatz PRIVATE TGUI::TGUI)
 
 # se il testing e' abilitato...
 #   per disabilitare il testing, passare -DBUILD_TESTING=OFF a cmake durante la fase di configurazione

@@ -1,25 +1,27 @@
 #include <SFML/Graphics.hpp>
 #include "collatz/collatz.h"
-#include <iostream>
+#include <TGUI/TGUI.hpp>
+#include <TGUI/Backend/SFML-Graphics.hpp>
+#include "events/events.h"
 
 int main() {
-    int n;
+    int n{};
 
-    std::cout << "Insert a number\n";
-    std::cin >> n;
+    sf::RenderWindow window{{800, 600}, "Collatz visualizer"};
+    window.setPosition(sf::Vector2i(10, 50));
 
-    auto v = collatz::sequence(n);
-    auto last = --v.end();
+    tgui::Gui gui{window};
 
-    std::cout << "[";
+    auto edit_box = tgui::EditBox::create();
+    edit_box->setAlignment(tgui::EditBox::Alignment::Right);
+    edit_box->onTextChange(&events::onTextCallback, std::ref(n));
+    edit_box->setMaximumCharacters(3);
 
-    for (auto it = v.begin(); it < v.end(); it++) {
-        std::cout << *it;
+    auto button = tgui::Button::create("Run");
+    button->onPress(&events::onPressCallback, std::ref(n));
 
-        if (it != last) {
-            std::cout << ", ";
-        }
-    }
+    gui.add(edit_box);
+    gui.add(button);
 
-    std::cout << "]";
+    gui.mainLoop();
 }
