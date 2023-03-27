@@ -28,7 +28,7 @@ find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
 find_package(TGUI 0.10 REQUIRED)
 
-add_executable(collatz main.cpp collatz/collatz.cpp events/events.cpp)
+add_executable(collatz main.cpp collatz/collatz.cpp events/events.cpp ui/ui.cpp ui/ui.h)
 target_link_libraries(collatz PRIVATE sfml-graphics)
 target_link_libraries(collatz PRIVATE TGUI::TGUI)
 
