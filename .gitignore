@@ -1,3 +1,9 @@
+# IDE folders
 .idea
+.vscode
+
+# CMake folders
 cmake-build-debug
 build
+CMakeFiles
+.cmake
